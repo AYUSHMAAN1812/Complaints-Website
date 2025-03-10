@@ -30,8 +30,9 @@ const Page = () => {
                 <span> Password:</span>
                 <span className='border-1 border-white rounded-sm pl-4'> <input type="text" placeholder='Enter your Password' onChange={(e)=>{setPassword(e.target.value)}}/></span>
             </div>
+        <button onClick={handelSignIn}>Sign In</button>
+        <h6>If new user, then <a href='/signup'>Register</a></h6>
         </div>
-      <button onClick={handelSignIn}>Sign In</button>
     </div>
   )
 }

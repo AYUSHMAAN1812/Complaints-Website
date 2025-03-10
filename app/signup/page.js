@@ -31,8 +31,9 @@ const Sign = () => {
                 <span> Password:</span>
                 <span className='border-1 border-white rounded-sm pl-4'> <input type="text" placeholder='Enter your Password' onChange={(e)=>{setPassword(e.target.value)}}/></span>
             </div>
+        <button onClick={handleSignUp}>Register</button>
+        <h6>Already a user, then <a href='/login'>Sign In</a> </h6>
         </div>
-      <button onClick={handleSignUp}>Register</button>
     </div>
   )
 }

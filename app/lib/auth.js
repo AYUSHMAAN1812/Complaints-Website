@@ -1,5 +1,6 @@
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../firebaseConfig";
+import Page from "../login/page";
 
 const auth = getAuth(app);
 
@@ -7,7 +8,7 @@ const auth = getAuth(app);
 export const signUp = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
+    return <Page/>;
   } catch (error) {
     console.error(error.message);
     throw error;
