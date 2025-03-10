@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
-const issues=["Radiant Cooling ", "LAN Issues", "Housee Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water", "Others"]
+const issues=["Radiant Cooling ", "LAN Issues", "House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water", "Others"]
 
 const Dashboard = () => {
     const [form, setForm] = useState({ email: "", password: "", issue: "" })

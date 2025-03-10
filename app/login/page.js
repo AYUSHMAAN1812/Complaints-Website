@@ -1,7 +1,10 @@
 "use client"
+ 
+import { redirect } from 'next/navigation'
 import Link from "next/link";
 import React, { useState } from 'react'
 import { signInWithGoogle } from "../lib/auth";
+import Dashboard from "../components/dashboard";
 const handlechange = (e) => {
   setform({ ...form, [e.target.name]: e.target.value })
 }
@@ -16,6 +19,7 @@ const LogIn = () => {
       const user = await signInWithGoogle();
       console.log("User signed in:", user);
       alert(`Welcome, ${user.displayName}!`);
+      redirect('/dashboard');
     
   };
   return (
