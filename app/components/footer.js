@@ -2,12 +2,10 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono'>
-        <ul className='flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono'>
-            <li>Copyright</li>
-            <li> Contact Us</li>
-        </ul>
-    </div>
+    <div className='flex h-16 bg-purple-300 absolute bottom-0 w-full gap-2 pl-3.5'>
+            <span className='text-black'> Copyright</span>
+            <span className='text-black'>Report an Issue</span>
+        </div>
   )
 }
 
