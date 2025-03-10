@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -15,10 +16,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 let analytics = null;
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 // Ensure Firebase Analytics runs only in the browser
 if (typeof window !== "undefined") {
   analytics = getAnalytics(app);
 }
 
-export { app, analytics };
+export { auth, googleProvider };
