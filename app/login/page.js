@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useState } from 'react'
 const handlechange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value })
@@ -7,7 +8,7 @@ const handleadd = (e) => {
     setform({ ...form, [e.target.name]: e.target.value })
 }
 
-const Sign = () => {
+const LogIn = () => {
     const [form, setform] = useState([email="", password=""]) 
     return (
         <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] flex justify-center my-auto">
@@ -37,6 +38,7 @@ const Sign = () => {
         </div>
         </div >
     )
+
 }
 
-export default Sign
+export default LogIn
