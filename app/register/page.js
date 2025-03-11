@@ -5,11 +5,12 @@ const handlechange = (e) => {
   setform({ ...form, [e.target.name]: e.target.value })
 }
 const handleadd = (e) => {
-  setform({ ...form, [e.target.name]: e.target.value })
+  setcredential({ ...credential, form })
 }
 
 const Register = () => {
   const [form, setform] = useState({})
+  const [credential, setcredential] = useState([{}])
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] flex justify-center my-auto">
       <div className='flex flex-col justify-center align-center gap-8'>

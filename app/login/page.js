@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useState,useEffect } from 'react'
 import { signInWithGoogle } from "../lib/auth";
 
-
 const LogIn = () => {
   const [form, setform] = useState({});
   const router = useRouter();
