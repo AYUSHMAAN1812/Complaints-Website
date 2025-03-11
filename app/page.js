@@ -2,8 +2,23 @@
 import { useAuth } from "./context/AuthContext";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
+  <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+    />
   const router = useRouter();
   const { user, googleSignIn } = useAuth();
   const [isClient, setIsClient] = useState(false);
@@ -24,12 +39,24 @@ export default function Home() {
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);
       alert("Google Sign-In failed. Please try again.");
+      toast.warn('🦄 Failed to Login!', {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  transition: Bounce,
+                  });
     }
   };
 
   if (!isClient) return null;
   if (user && user?.email?.endsWith("@iith.ac.in")) return null;
   return (
+    
     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center">  
       <div className="flex flex-col justify-center items-center gap-4">
       <h1 className="text-3xl font-bold text-white">IITH Complaints Portal</h1>
