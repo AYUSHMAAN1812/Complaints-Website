@@ -4,8 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from "next/link";
 import React, { useState } from 'react'
 import { signInWithGoogle } from "../lib/auth";
-import Dashboard from "../components/dashboard";
-import { redirect } from "next/dist/server/api-utils";
+
 const handlechange = (e) => {
   setform({ ...form, [e.target.name]: e.target.value })
 }
