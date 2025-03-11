@@ -1,11 +1,32 @@
 "use client"
 import React from 'react'
 import { useState } from 'react'
+import {db} from '../firebaseConfig'
+import { collection,addDoc } from 'firebase/firestore'
+async function addReportsAndSuggestionsToDatabase(issue) {
+    try {
+        const docRef = await addDoc(collection(db,"issues_and_suggestions"),{
+            issue : issue,
+        });
+        
+        console.log("Document written with ID:",docRef.id);
+        return true;
+    } catch (error) {
+        console.log("Error encountered while writing the document into database!");
+        return false;
+    }
+}
 const Report = () => {
     const [issue, setissue] = useState("")
     const [issues, setissues] = useState([])
-    const handleSubmit = (e) => {
-        setissues([...issues, issue])
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const added = await addReportsAndSuggestionsToDatabase(issue);
+        if(added)
+        {
+            setissue("");
+            alert("Reported an issue!");
+        }
     }
     const handleChange = (e) => {
         setissue(e.target.value)

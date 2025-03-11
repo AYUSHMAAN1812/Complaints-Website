@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from "../context/AuthContext"
 import { useRouter } from "next/navigation"
 import {db} from '../firebaseConfig'
-import { collection,addDoc } from 'firebase/firestore'
+import { collection,addDoc, serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
@@ -33,30 +33,51 @@ const hostels = [
   "Anandi",
   "Sarojini Naidu"
 ];
+const recipentsMap = new Map();
+recipentsMap.set("radiant_cooling",[]);
+recipentsMap.set("house_keeping",[]);
+recipentsMap.set("plumbing_issues",[]);
+recipentsMap.set("mess",[]);
+recipentsMap.set("water_supply",[]);
+recipentsMap.set("hot_water",[]);
+recipentsMap.set("washing_machine",[]);
+recipentsMap.set("electrical",[]);
+recipentsMap.set("drinking_water",[]);
+recipentsMap.set("others",[]);
+
 async function addDataToFireStore(name,email,hostelName, hostelRoom, description,issue) {
   try{
-    const docRef = await addDoc(collection(db,"complaints"),{
+    if (!issue || typeof issue !== "string") {
+      throw new Error("Invalid issue type provided");
+    }
+
+    // Clean up the issue name to prevent Firestore errors
+    const sanitizedIssue = issue.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+    const docRef = await addDoc(collection(db,"one"),{
       name : name,
       email : email,
       hostelName : hostelName,
       hostelRoom: hostelRoom,
       description: description,
       issue: issue,
+      resolved:false,
+      mailSent:false,
+      threadID : "",
+      recipents:recipentsMap[sanitizedIssue] || [],
+      timestamp: serverTimestamp(),
     });
     console.log("Document written with ID:",docRef.id);
     return true; // for adding data successfully
   } catch (error)
   {
-    console.log("Erroe encountered while adding document to Database ", error);
+    console.log("Error encountered while adding document to Database ", error);
     return false; // to indicate that the data was not added successfully
   }
 }
 
 const Dashboard = () => {
   const { user } = useAuth();
-  const router = useRouter();
-  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",description:"",issue:""})
-  const [complaints, setComplaints] = useState([])
+  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""})
  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -66,7 +87,7 @@ const Dashboard = () => {
     const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.description,form.issue);
     if(added)
     {
-      setForm({name:"",email:"",hostelName:"",hostelRoom:"",description:"",issue:""});
+      setForm({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""});
       alert("Complaint has been logged!");
     }
   }
@@ -137,7 +158,7 @@ const Dashboard = () => {
               placeholder="Any other issue..."
               onChange={handleChange}
             />
-          </div>
+        </div>
           <button
             type="submit"
             className="self-center relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
