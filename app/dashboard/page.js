@@ -33,14 +33,15 @@ const hostels = [
   "Anandi",
   "Sarojini Naidu"
 ];
-async function addDataToFireStore(name,email,hostelName, hostelRoom, issueType) {
+async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,issue) {
   try{
     const docRef = await addDoc(collection(db,"complaints"),{
       name : name,
       email : email,
       hostelName : hostelName,
       hostelRoom: hostelRoom,
-      issueType: issueType,
+      otherissue: otherissue,
+      issue: issue,
     });
     console.log("Document written with ID:",docRef.id);
     return true; // for adding data successfully
@@ -53,7 +54,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, issueType) 
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",issueType:""})
+  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
@@ -61,10 +62,10 @@ const Dashboard = () => {
   }
   const handleAdd = async (e) => {
     e.preventDefault();
-    const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.issueType);
+    const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.otherissue,form.issue);
     if(added)
     {
-      setForm({name:"",email:"",hostelName:"",hostelRoom:"",issueType:""});
+      setForm({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""});
       alert("Complaint has been logged!");
     }
   }
@@ -77,8 +78,9 @@ const Dashboard = () => {
             <label className="w-50" htmlFor="issue">Hostel Name:</label>
             <select
               className="w-xl ml-2 border-2 border-l-white max-h-10 overflow-y-auto"
-              id="issue"
-              name="issue"
+              id="hostelName"
+              name="hostelName"
+              value={form.hostelName}
               required
               onChange={handleChange}
             >
@@ -97,8 +99,9 @@ const Dashboard = () => {
               type="tel"
               inputMode="numeric"
               pattern="[0-9]*"
-              id="number"
-              name="number"
+              id="hostelRoom"
+              name="hostelRoom"
+              value={form.hostelRoom}
               placeholder='Enter your room number'
               required
               onChange={handleChange}
@@ -111,6 +114,7 @@ const Dashboard = () => {
               className="w-xl ml-2 border-2 border-l-white"
               id="issue"
               name="issue"
+              value={form.issue}
               required
               onChange={handleChange}
             >
@@ -126,8 +130,9 @@ const Dashboard = () => {
             <label className="w-50" htmlFor="other-issue">Any other issue:</label>
             <textarea
               className="border-2 border-l-white h-48 p-2 w-xl "
-              id="other-issue"
-              name="other-issue"
+              id="otherissue"
+              name="otherissue"
+              value={form.otherissue}
               placeholder="Any other issue..."
               onChange={handleChange}
             />
