@@ -1,32 +1,44 @@
 "use client"
- 
-import { redirect } from 'next/navigation'
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/navigation'
 import Link from "next/link";
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { signInWithGoogle } from "../lib/auth";
-import Dashboard from "../components/dashboard";
-import { redirect } from "next/dist/server/api-utils";
-const handlechange = (e) => {
-  setform({ ...form, [e.target.name]: e.target.value })
-}
-const handleadd = (e) => {
-  setform({ ...form, [e.target.name]: e.target.value })
-}
+
 
 const LogIn = () => {
-  const [form, setform] = useState({})
+  const [form, setform] = useState({});
+  const router = useRouter();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted:", form);
+    router.push("/dashboard");
+  };
+
   const handleGoogleLogin = async () => {
-    
+    try {
       const user = await signInWithGoogle();
       console.log("User signed in:", user);
       alert(`Welcome, ${user.displayName}!`);
-      redirect('/dashboard');
-    
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Google Sign-In Error:", error.message);
+      alert("Google Sign-In failed. Please try again.");
+    }
   };
+  const handlechange = (e) => {
+    setform({ ...form, [e.target.name]: e.target.value })
+  }
+  useEffect(() => {
+    if(form.email && form.password)
+    {
+      router.push("/dashboard");
+    }
+  }, [form])
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] flex justify-center my-auto">
       <div className='flex flex-col justify-center align-center gap-8'>
-        <form className='flex flex-col gap-4' onSubmit={handleadd}>
+        <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
           <div className='flex gap-2 text-2xl'>
             <label htmlFor="email">Email ID:</label>
             <input className=" w-xl ml-5 border-2 border-l-white" type="email" id="email" name="email" value={form.email || ""} required onChange={handlechange} />
