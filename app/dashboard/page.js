@@ -51,6 +51,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
     return false; // to indicate that the data was not added successfully
   }
 }
+
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
@@ -70,14 +71,14 @@ const Dashboard = () => {
     }
   }
   return (
-    <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] position-relative">
+    <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
       <Navbar />
       <div className='flex flex-col justify-center items-center'>
-        <form className="flex flex-col gap-4 mt-10 items-start " onSubmit={handleAdd}>
-          <div className="flex gap-2 text-2xl items-start">
+        <form className="flex flex-col gap-4 mt-10 items-start text-white z-40 " onSubmit={handleAdd}>
+          <div className="flex gap-2 text-2xl items-start max-h-10">
             <label className="w-50" htmlFor="issue">Hostel Name:</label>
             <select
-              className="w-xl ml-2 border-2 border-l-white max-h-10 overflow-y-auto"
+              className="w-xl ml-2 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.6)] "   
               id="hostelName"
               name="hostelName"
               value={form.hostelName}
@@ -111,7 +112,7 @@ const Dashboard = () => {
           <div className="flex gap-2 text-2xl items-start">
             <label className="w-50" htmlFor="issue">Issue Type:</label>
             <select
-              className="w-xl ml-2 border-2 border-l-white"
+              className="w-xl ml-2 border-2 border-l-white bg-[#050110] text-[rgba(255,255,255,0.6)]"
               id="issue"
               name="issue"
               value={form.issue}
@@ -127,9 +128,9 @@ const Dashboard = () => {
             </select>
           </div>
           <div className="flex gap-4 text-2xl ">
-            <label className="w-50" htmlFor="other-issue">Any other issue:</label>
+            <label className="w-50" htmlFor="other-issue">Description:</label>
             <textarea
-              className="border-2 border-l-white h-48 p-2 w-xl "
+              className="border-2 border-l-white h-48 p-2 w-xl text-white z-50"
               id="description"
               name="description"
               value={form.description}
