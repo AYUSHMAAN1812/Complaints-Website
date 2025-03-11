@@ -7,7 +7,7 @@ import { collection,addDoc } from 'firebase/firestore'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
-const issues = ["Radiant Cooling ", "LAN Issues", "House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water", "Others"]
+const issues = ["Radiant Cooling ","House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water", "Others"]
 const hostels = [
   "Charaka",
   "Susruta",
@@ -33,14 +33,14 @@ const hostels = [
   "Anandi",
   "Sarojini Naidu"
 ];
-async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,issue) {
+async function addDataToFireStore(name,email,hostelName, hostelRoom, description,issue) {
   try{
     const docRef = await addDoc(collection(db,"complaints"),{
       name : name,
       email : email,
       hostelName : hostelName,
       hostelRoom: hostelRoom,
-      otherissue: otherissue,
+      description: description,
       issue: issue,
     });
     console.log("Document written with ID:",docRef.id);
@@ -54,7 +54,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""})
+  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",description:"",issue:""})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
@@ -62,10 +62,10 @@ const Dashboard = () => {
   }
   const handleAdd = async (e) => {
     e.preventDefault();
-    const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.otherissue,form.issue);
+    const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.description,form.issue);
     if(added)
     {
-      setForm({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""});
+      setForm({name:"",email:"",hostelName:"",hostelRoom:"",description:"",issue:""});
       alert("Complaint has been logged!");
     }
   }
@@ -130,13 +130,13 @@ const Dashboard = () => {
             <label className="w-50" htmlFor="other-issue">Any other issue:</label>
             <textarea
               className="border-2 border-l-white h-48 p-2 w-xl "
-              id="otherissue"
-              name="otherissue"
-              value={form.otherissue}
+              id="description"
+              name="description"
+              value={form.description}
               placeholder="Any other issue..."
               onChange={handleChange}
             />
-          </div>
+          </div>
           <button
             type="submit"
             className="self-center relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
