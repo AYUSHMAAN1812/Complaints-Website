@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { useAuth } from "../context/AuthContext"
 import { useRouter } from "next/navigation"
 import {db} from '../firebaseConfig'
@@ -76,8 +76,8 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
 }
 
 const Dashboard = () => {
-  const arr={name:"Prakash Shaw",roll:"CO23BTECH11017"}
   const { user } = useAuth();
+  const arr={name:user?.displayName,roll:user?.email?.slice(0,-11)};
   const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",description:"",issue:"",resolved:false,mailSent:false,threadID:""})
  
   const handleChange = (e) => {
@@ -89,6 +89,7 @@ const Dashboard = () => {
     if(added)
     {
       alert("Complaint has been logged!");
+      
     }
   }
   return (
