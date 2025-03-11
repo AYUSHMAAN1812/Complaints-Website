@@ -37,12 +37,7 @@ const Dashboard = () => {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "", issue: "", otherissue: "" })
   const [complaints, setComplaints] = useState([])
-  // Ensure component is mounted before rendering user data
-  useEffect(() => {
-    if (!user) {
-      router.push("/home");
-    }
-  }, [user, router]);
+ 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
