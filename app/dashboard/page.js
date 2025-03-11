@@ -37,7 +37,7 @@ const recipentsMap = new Map();
 recipentsMap.set("radiant_cooling",[]);
 recipentsMap.set("house_keeping",[]);
 recipentsMap.set("plumbing_issues",[]);
-recipentsMap.set("mess",["mess_secya@gymkhana.iith.ac.in","mmc@gymkhana.iith.ac.in"]);
+recipentsMap.set("mess",[]);
 recipentsMap.set("water_supply",[]);
 recipentsMap.set("hot_water",[]);
 recipentsMap.set("washing_machine",[]);
@@ -53,7 +53,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
 
     // Clean up the issue name to prevent Firestore errors
     const sanitizedIssue = issue.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "_");
-    const docRef = await addDoc(collection(db,sanitizedIssue),{
+    const docRef = await addDoc(collection(db,"one"),{
       name : name,
       email : email,
       hostelName : hostelName,
@@ -77,7 +77,6 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
 const Dashboard = () => {
   const { user } = useAuth();
   const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""})
-  const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
