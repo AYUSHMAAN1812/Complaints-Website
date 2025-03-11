@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from "../context/AuthContext"
 import { useRouter } from "next/navigation"
+import {db} from '../firebaseConfig'
+import { collection,addDoc } from 'firebase/firestore'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
@@ -31,18 +33,40 @@ const hostels = [
   "Anandi",
   "Sarojini Naidu"
 ];
-
+async function addDataToFireStore(name,email,hostelName, hostelRoom, issueType) {
+  try{
+    const docRef = await addDoc(collection(db,"complaints"),{
+      name : name,
+      email : email,
+      hostelName : hostelName,
+      hostelRoom: hostelRoom,
+      issueType: issueType,
+    });
+    console.log("Document written with ID:",docRef.id);
+    return true; // for adding data successfully
+  } catch (error)
+  {
+    console.log("Erroe encountered while adding document to Database ", error);
+    return false; // to indicate that the data was not added successfully
+  }
+}
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const [form, setForm] = useState({ email: "", password: "", issue: "", otherissue: "" })
+  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",issueType:""})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
-  const handleAdd = (e) => {
-    setComplaints([...complaints, form])
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.issueType);
+    if(added)
+    {
+      setForm({name:"",email:"",hostelName:"",hostelRoom:"",issueType:""});
+      alert("Complaint has been logged!");
+    }
   }
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] position-relative">
