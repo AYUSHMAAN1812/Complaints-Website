@@ -54,7 +54,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const [form, setForm] = useState({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""})
+  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:""})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
