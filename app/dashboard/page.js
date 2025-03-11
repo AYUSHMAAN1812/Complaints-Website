@@ -7,7 +7,7 @@ import { collection,addDoc, serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
-const issues = ["Radiant Cooling ","House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water", "Others"]
+const issues = ["Radiant Cooling ","House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water"]
 const hostels = [
   "Charaka",
   "Susruta",
@@ -76,6 +76,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
 }
 
 const Dashboard = () => {
+  const arr={name:"Prakash Shaw",roll:"CO23BTECH11017"}
   const { user } = useAuth();
   const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",description:"",issue:"",resolved:false,mailSent:false,threadID:""})
  
@@ -93,12 +94,18 @@ const Dashboard = () => {
   return (
     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
       <Navbar />
+      <span className="block border-t-2 border-gray-600 w-full"></span>
+      <div className='flex flex-col ml-20 gap-4 text-white font-semibold text-2xl mt-3'>
+        <span> Name: {arr.name}</span>
+        <span> Roll Number: {arr.roll}</span>
+
+      </div>
       <div className='flex flex-col justify-center items-center'>
         <form className="flex flex-col gap-4 mt-10 items-start text-white z-40 " onSubmit={handleAdd}>
           <div className="flex gap-2 text-2xl items-start max-h-10">
             <label className="w-50" htmlFor="issue">Hostel Name:</label>
             <select
-              className="w-xl ml-2 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.6)] "   
+              className="w-xl ml-2 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.5)] "   
               id="hostelName"
               name="hostelName"
               value={form.hostelName}
@@ -132,7 +139,8 @@ const Dashboard = () => {
           <div className="flex gap-2 text-2xl items-start">
             <label className="w-50" htmlFor="issue">Issue Type:</label>
             <select
-              className="w-xl ml-2 border-2 border-l-white bg-[#050110] text-[rgba(255,255,255,0.6)]"
+  
+              className="w-xl ml-2 border-2 overflow-y-scroll border-l-white bg-[#050110] text-[rgba(255,255,255,0.5)]"
               id="issue"
               name="issue"
               value={form.issue}
@@ -154,19 +162,20 @@ const Dashboard = () => {
               id="description"
               name="description"
               value={form.description}
-              placeholder="Any other issue..."
+              placeholder="Description of the issue"
               onChange={handleChange}
             />
         </div>
           <button
             type="submit"
-            className="self-center relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
+            className="self-center relative inline-flex items-center justify-center p-0.5 mb-8 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+            <span className="hover:cursor-pointer relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
               Submit
             </span>
           </button>
         </form>
+        <span className="block border-t-2 border-gray-600 w-full"></span>
       </div>
       <Footer />
     </div>
