@@ -35,26 +35,33 @@ const hostels = [
 ];
 async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,issue) {
   try{
-    const docRef = await addDoc(collection(db,"complaints"),{
+    if (!issue || typeof issue !== "string") {
+      throw new Error("Invalid issue type provided");
+    }
+
+    // Clean up the issue name to prevent Firestore errors
+    const sanitizedIssue = issue.trim().toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+    const docRef = await addDoc(collection(db,sanitizedIssue),{
       name : name,
       email : email,
       hostelName : hostelName,
       hostelRoom: hostelRoom,
       otherissue: otherissue,
       issue: issue,
+      timestamp: new Date(),
     });
     console.log("Document written with ID:",docRef.id);
     return true; // for adding data successfully
   } catch (error)
   {
-    console.log("Erroe encountered while adding document to Database ", error);
+    console.log("Error encountered while adding document to Database ", error);
     return false; // to indicate that the data was not added successfully
   }
 }
 const Dashboard = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:""})
+  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
@@ -65,7 +72,7 @@ const Dashboard = () => {
     const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.otherissue,form.issue);
     if(added)
     {
-      setForm({name:"",email:"",hostelName:"",hostelRoom:"",otherissue:"",issue:""});
+      setForm({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false});
       alert("Complaint has been logged!");
     }
   }
