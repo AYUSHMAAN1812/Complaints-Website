@@ -24,7 +24,6 @@ const Report = () => {
         const added = await addReportsAndSuggestionsToDatabase(issue);
         if(added)
         {
-            setissue("");
             alert("Reported an issue!");
         }
     }

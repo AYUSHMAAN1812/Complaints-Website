@@ -15,7 +15,6 @@ const Navbar = () => {
     const handleSignOut = async () => {
         try {
             await logOut();
-            alert("Logged out successfully!");
         } catch (error) {
             console.log("Sign out error:", error.message);
             alert("Sign out failed!");
