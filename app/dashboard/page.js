@@ -33,6 +33,18 @@ const hostels = [
   "Anandi",
   "Sarojini Naidu"
 ];
+
+const recipentsMap = new Map();
+recipentsMap.set("radiant_cooling",[]);
+recipentsMap.set("house_keeping",[]);
+recipentsMap.set("plumbing_issues",[]);
+recipentsMap.set("mess",["mess_secya@gymkhana.iith.ac.in","mmc@gymkhana.iith.ac.in"]);
+recipentsMap.set("water_supply",[]);
+recipentsMap.set("hot_water",[]);
+recipentsMap.set("washing_machine",[]);
+recipentsMap.set("electrical",[]);
+recipentsMap.set("drinking_water",[]);
+recipentsMap.set("others",[]);
 async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,issue) {
   try{
     if (!issue || typeof issue !== "string") {
@@ -48,6 +60,10 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,
       hostelRoom: hostelRoom,
       otherissue: otherissue,
       issue: issue,
+      resolved:false,
+      mailSent:false,
+      threadID : "",
+      recipents:recipentsMap[sanitizedIssue],
       timestamp: new Date(),
     });
     console.log("Document written with ID:",docRef.id);
@@ -60,7 +76,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, otherissue,
 }
 const Dashboard = () => {
   const { user } = useAuth();
-  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false})
+  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""})
   const [complaints, setComplaints] = useState([])
  
   const handleChange = (e) => {
@@ -71,7 +87,7 @@ const Dashboard = () => {
     const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.otherissue,form.issue);
     if(added)
     {
-      setForm({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false});
+      setForm({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""});
       alert("Complaint has been logged!");
     }
   }
