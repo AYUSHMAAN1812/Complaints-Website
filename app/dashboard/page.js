@@ -34,16 +34,17 @@ const hostels = [
   "Sarojini Naidu"
 ];
 const recipentsMap = new Map();
-recipentsMap.set("radiant_cooling",[]);
-recipentsMap.set("house_keeping",[]);
-recipentsMap.set("plumbing_issues",[]);
-recipentsMap.set("mess",[]);
-recipentsMap.set("water_supply",[]);
-recipentsMap.set("hot_water",[]);
-recipentsMap.set("washing_machine",[]); 
-recipentsMap.set("electrical",[]);
-recipentsMap.set("drinking_water",[]);
-recipentsMap.set("others",[]);
+recipentsMap.set("radiant_cooling",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("house_keeping",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("plumbing_issues",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("mess",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("water_supply",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("hot_water",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("washing_machine",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("electrical",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("drinking_water",["co23btech11020@iith.ac.in"]);
+recipentsMap.set("others",["co23btech11020@iith.ac.in"]);
+
 async function addDataToFireStore(name,email,hostelName, hostelRoom, description,issue) {
   try{
     if (!issue || typeof issue !== "string") {
@@ -77,7 +78,7 @@ async function addDataToFireStore(name,email,hostelName, hostelRoom, description
 const Dashboard = () => {
   const arr={name:"Prakash Shaw",roll:"CO23BTECH11017"}
   const { user } = useAuth();
-  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""})
+  const [form, setForm] = useState({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",description:"",issue:"",resolved:false,mailSent:false,threadID:""})
  
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -87,7 +88,6 @@ const Dashboard = () => {
     const added = await addDataToFireStore(form.name,form.email,form.hostelName,form.hostelRoom,form.description,form.issue);
     if(added)
     {
-      setForm({name:user?.displayName,email:user?.email,hostelName:"",hostelRoom:"",otherissue:"",issue:"",resolved:false,mailSent:false,threadID:""});
       alert("Complaint has been logged!");
     }
   }

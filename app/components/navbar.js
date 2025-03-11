@@ -29,6 +29,7 @@ const Navbar = () => {
                 theme: "dark",
                 transition: Bounce,
                 });
+
         } catch (error) {
             console.log("Sign out error:", error.message);
             alert("Sign out failed!");
