@@ -1,21 +1,23 @@
+"use client"
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext';
 import { db } from '../firebaseConfig'
-import { collection, getDocs, listCollections, orderBy, query } from 'firebase/firestore'
+import { collection, getDocs, getFirestore, orderBy, query,listCollections } from 'firebase/firestore'
 
-async function fetchDatafromFirestore(user) {
+async function fetchDatafromFirestore(username) {
   try {
-    const collections = await listCollections(db);
+    const firestore = getFirestore();
+    const collections = await listCollections(firestore);
     let allData = [];
-    for (const col in collections) {
-      const q = query(collection(db,col),orderBy("mailSent"),orderBy("timestamp","asc"));
+    for (const col of collections) {
+      const q = query(collection(db, col.id), orderBy("mailSent"), orderBy("timestamp", "asc"));
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      if (data.name === user?.name)
-        allData = [...allData, ...data];
+      const userData = data.filter((item) => item.name === username);
+      allData = [...allData, ...userData];
 
-      return allData;
     }
+    return allData;
   } catch (error) {
     console.log("Error while fetching the sorted data ", error);
     return [];
@@ -26,16 +28,12 @@ const Issues = () => {
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchDatafromFirestore(user);
+      const data = await fetchDatafromFirestore(user?.displayName);
       setUserdata(data);
     }
     fetchData();
-  }, []);
-  const handlechange = (e) => { 
-    
-  }
+  }, [user]);
   return (
-    
 
     <div className="absolute inset-0 -z-10 h-full w-full  px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] items-center"
     >
@@ -52,17 +50,17 @@ const Issues = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-x divide-gray-200">
-            {issues.map((issue, index) => (
+            {userdata.map((problem, index) => (
               <tr key={index}>
                 <td className="ml-4 px-6 py-4 whitespace-nowrap text-left font-normal text-white z-20">
-                  {issue.issue}
+                  {problem.issue}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right font-normal text-white z-20 " >
                   <input
                     className="h-6 w-6 text-blue-600 border-gray-300 rounded mr-6"
                     type="checkbox"
-                    checked={issue.resolved === "true"}
-                    
+                    checked={Boolean(problem.resolved)}
+                    readOnly
                   />
                 </td>
               </tr>
@@ -75,4 +73,4 @@ const Issues = () => {
   )
 }
 
-export default Pages
+export default Issues
