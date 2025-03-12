@@ -69,7 +69,7 @@ const Issues = () => {
       alert("Complaint has been resolved!");
       setStatus("Done");
       
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwHKItgXC5e6ddP0XqNF6bU8E_T7gfamfcumSZ5GqJ4jIS_8wKNlFLB9sBaHcb5JtTl/exec");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwvEjfemZ4vK0aT5qbBMKZ4bgIfSrNoGNsawSN4lr_nzYlSCtAM4JjFs_ascVwXxvnn/exec");
       
   
     } catch (error) {
