@@ -21,7 +21,7 @@ async function fetchDatafromFirestore(username) {
     });
 
     // Filter user-specific data
-    const userData = data.filter((item) => item.name === username && mailSent === true && resolved==false);
+    const userData = data.filter((item) => item.name === username);
     allData = [...allData, ...userData];
 
     return allData;
