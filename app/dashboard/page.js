@@ -104,7 +104,7 @@ const Dashboard = () => {
       alert("Complaint has been logged!");
       
       // Open the URL in a new tab
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbw-HpX4MVBDStRDf0jjPnie-rAfWDHgYaQOeKVMrvo6MZm9iZKlq0C8JqVwBaCu7gN8XQ/exec");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxABQX614mVUkgd0xdpzeE5EXt2xHH2tzKm82W0Un4C-ymz6aut6GNpXKivB_PJWO0C_Q/exec");
     }
   }
   

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../firebaseConfig";
-import { collection, getDocs, query, where, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 // Fetch data from Firestore
 async function fetchDatafromFirestore(username) {
@@ -49,15 +49,29 @@ const Issues = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  const handleDelete = async (docId) => {
+  const handleDelete = async (threadId, index) => {
     try {
-      await deleteDoc(doc(db, "one", docId));
+      // Get the reference to the document
+      const docRef = doc(db, "one", threadId);
+
+      // Update the resolved field
+      await updateDoc(docRef, { resolved: true });
+
+      // Open the window after the update
+      alert("Complaint has been resolved!");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzk0jV5KdBrays2fNg05F7ytNSTwU1PT7f5ljo26_AwFYAYmvYWM18ohTjK6Kv3KJzC/exec");
+
+      // Now delete the document
+      await deleteDoc(docRef);
+
+      // Fetch updated data and set user data
       const data = await fetchDatafromFirestore(user.displayName);
       setUserdata(data || []);
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
   };
+
 
   return (
     <div className="absolute inset-0 -z-10 h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] items-center">
@@ -95,10 +109,10 @@ const Issues = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-right font-normal text-black z-20">
                     <button
                       className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 z-10"
-                      onClick={() => handleDelete(problem.id)}
+                      onClick={() => handleDelete(problem.threadId, index)}
                     >
                       <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-                        {!problem.resolved ? "Resolve" : "Done"}
+                        {!problem.resolved ? "Resolved" : "Done"}
                       </span>
                     </button>
                   </td>
