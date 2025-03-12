@@ -99,7 +99,33 @@ const Dashboard = () => {
     e.preventDefault();
     const added = await addDataToFireStore(form.name, form.email, form.hostelName, form.hostelRoom, form.description, form.issue);
     if (added) {
+      
       alert("Complaint has been logged!");
+      const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("hostelName", form.hostelName);
+    formData.append("hostelRoom", form.hostelRoom);
+    formData.append("description", form.description);
+    formData.append("issue", form.issue);
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/a/macros/iith.ac.in/s/AKfycbwnsbpxFrsgmcH1xCZ4KwHDmat_Oeelrbn-xXTm4JUjsrEQnFLnGdpc0raYb0K75qcA_Q/exec",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        alert("Complaint has been logged successfully!");
+      } else {
+        alert("Error submitting the complaint!");
+      }
+    } catch (error) {
+      console.error("Error submitting form to Google Apps Script:", error);
+    }
 
     }
   }
