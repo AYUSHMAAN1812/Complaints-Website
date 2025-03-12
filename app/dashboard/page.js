@@ -236,7 +236,7 @@ const Dashboard = () => {
             </div>
             
             {/* Row for Description */}
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex flex-col items-center gap-4 mb-6">
               <label className="w-32 md:w-44" htmlFor="description">
                 Description:
               </label>
