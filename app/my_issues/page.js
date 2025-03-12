@@ -51,38 +51,7 @@ const Issues = () => {
   if (loading) return <div>Loading...</div>;
 
 
-  const handleDelete = async (docId, e) => {
-    e.preventDefault();
   
-    // Open the Google Apps Script URL immediately to ensure it's triggered by the user action.
-    const emailWindow = window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwHKItgXC5e6ddP0XqNF6bU8E_T7gfamfcumSZ5GqJ4jIS_8wKNlFLB9sBaHcb5JtTl/exec");
-  
-    try {
-      // Get the reference to the document in Firestore and update the 'resolved' field
-      const docRef = doc(db, "one", docId);
-      await updateDoc(docRef, { resolved: true });
-      
-      // Log to check if 'resolved' is being updated in Firestore
-      const updatedDoc = await getDoc(docRef);
-      console.log("Document after update:", updatedDoc.data());
-  
-      // Inform the user that the complaint has been resolved
-      alert("Complaint has been resolved!");
-      setStatus("Done");
-  
-      // Wait for 10 seconds (or adjust as needed) before deleting the document
-      setTimeout(async () => {
-        await deleteDoc(docRef);
-  
-        // Fetch updated data and update state
-        const data = await fetchDatafromFirestore(user.displayName);
-        setUserdata(data || []);
-      }, 10000);  // Adjust delay if necessary
-  
-    } catch (error) {
-      console.error("Error updating or deleting document: ", error);
-    }
-  };
 
   return (
     <div className="absolute inset-0 -z-10 h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] items-center">
