@@ -66,9 +66,6 @@ async function addDataToFireStore(name, email, hostelName, hostelRoom, descripti
       throw new Error("Issue type contains only invalid characters");
     }
 
-    alert("Sanitized Issue:", sanitizedIssue);
-    alert("All Keys:", [...recipentsMap.keys()]);
-    alert("Recipients:", recipentsMap.get(sanitizedIssue) || []);
     const docRef = await addDoc(collection(db, "one"), {
       name: name,
       email: email,
@@ -139,7 +136,7 @@ const Dashboard = () => {
       <span className="block border-t-2 border-gray-600 w-full"></span>
       <div className='flex flex-col ml-20 gap-4 text-white font-semibold text-2xl mt-3'>
         <span> Name: {arr.name}</span>
-        <span> Roll Number: {arr.roll}</span>
+        <span className='uppercase'> Roll Number: {arr.roll}</span>
 
       </div>
       <div className='flex flex-col md:justify-center md:items-center justify-items-start items-center'>
@@ -147,7 +144,7 @@ const Dashboard = () => {
           <div className="md:flex md:flex-row flex flex-col gap-2 text-2xl items-start max-h-10 ">
             <label className="w-44" htmlFor="issue">Hostel Name:</label>
             <select
-              className="md:w-xl w-xs ml-1.5 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.5)]  "
+              className="md:w-xl w-xs ml-1.5 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.9)]  "
               id="hostelName"
               name="hostelName"
               value={form.hostelName}
@@ -165,7 +162,7 @@ const Dashboard = () => {
           <div className="md:flex md:flex-row flex flex-col gap-2 text-2xl items-start mt-7 md:mt-0">
             <label className="w-44" htmlFor="room number">Room Number:</label>
             <input
-              className="md:w-xl  w-xs ml-1.5 border-2 border-l-white "
+              className="md:w-xl  w-xs ml-1.5 border-2 border-l-white text-[rgba(255,255,255,0.9)] "
               type="tel"
               inputMode="numeric"
               pattern="[0-9]*"
@@ -182,7 +179,7 @@ const Dashboard = () => {
             <label className="w-44" htmlFor="issue">Issue Type:</label>
             <select
 
-              className="md:w-xl w-xs ml-1.5 border-2 overflow-y-scroll border-l-white bg-[#050110] text-[rgba(255,255,255,0.5)]"
+              className="md:w-xl w-xs ml-1.5 border-2 overflow-y-scroll border-l-white bg-[#050110] text-[rgba(255,255,255,0.9)]"
               id="issue"
               name="issue"
               value={form.issue}
@@ -200,7 +197,7 @@ const Dashboard = () => {
           <div className="md:flex md:flex-row flex flex-col gap-4 text-2xl ">
             <label className="w-44" htmlFor="other-issue">Description:</label>
             <textarea
-              className="border-2 w-xs border-l-white h-48 p-2 md:w-xl text-white z-50 min-h-10 "
+              className="border-2 w-xs border-l-white h-48 p-2 md:w-xl  text-[rgba(255,255,255,0.9) z-50 min-h-10 "
               id="description"
               name="description"
               value={form.description}
