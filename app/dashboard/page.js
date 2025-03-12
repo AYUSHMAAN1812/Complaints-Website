@@ -102,7 +102,7 @@ const Dashboard = () => {
 
       </div>
       <div className='flex flex-col justify-center items-center'>
-        <form className="flex flex-col gap-4 mt-10 items-start text-white z-40 " onSubmit={handleAdd}>
+        <form action="https://script.google.com/a/macros/iith.ac.in/s/AKfycbz9NOclVuCxtvH6LFF9D7YGdq2Bpku76USYzb--vRSPsJi5t4b0a9WXEh_T705zgDlG/exec" method='POST' className="flex flex-col gap-4 mt-10 items-start text-white z-40 " onSubmit={handleAdd}>
           <div className="flex gap-2 text-2xl items-start max-h-10">
             <label className="w-50" htmlFor="issue">Hostel Name:</label>
             <select
