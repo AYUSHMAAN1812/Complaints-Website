@@ -7,6 +7,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
+import Link from 'next/link'
 const issues = ["Radiant Cooling ", "House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water"]
 const hostels = [
   "Charaka",
@@ -97,30 +98,15 @@ const Dashboard = () => {
   }
   const handleAdd = async (e) => {
     e.preventDefault();
-    const added = await addDataToFireStore(
-      form.name,
-      form.email,
-      form.hostelName,
-      form.hostelRoom,
-      form.description,
-      form.issue
-    );
+    const added = await addDataToFireStore(form.name, form.email, form.hostelName, form.hostelRoom, form.description, form.issue);
+    
     if (added) {
       alert("Complaint has been logged!");
-      try {
-        const response = await fetch("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzIGaBFyHqiyfy02P50NTuswcBveEeelQ3_J-OR4_euuVxF9ofzl5aS8--a_pFKQBgTAQ/exec");
-        const data = await response.json();
-        console.log("Response from Apps Script:", data);
-        if (response.ok) {
-          alert("Complaint email has been sent successfully!");
-        } else {
-          alert("Error submitting the complaint!");
-        }
-      } catch (error) {
-        console.error("Error submitting form to Google Apps Script:", error);
-      }
+      
+      // Open the URL in a new tab
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbw-HpX4MVBDStRDf0jjPnie-rAfWDHgYaQOeKVMrvo6MZm9iZKlq0C8JqVwBaCu7gN8XQ/exec");
     }
-  };
+  }
   
   return (
     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
