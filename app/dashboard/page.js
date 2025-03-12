@@ -137,7 +137,7 @@ const Dashboard = () => {
                   });
       
       // Open the URL in a new tab
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwg9a_91o3LLsDbpdVC8icAj2urlLaSNIc25gmk3alxMmQcXRFCZtqKxxRM44WwN0FJ/exec");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzYgdmUPgs52IvkajRXXyCCUq3qaRySgnylgk-kMKhow5eWih0LyJvWTYrYgBLrJYybJA/exec");
 
     }
   }
@@ -160,7 +160,7 @@ const Dashboard = () => {
       
       <div className="min-h-screen w-full overflow-y-auto bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-10 md:px-10 md:py-24">
         <Navbar />
-        <hr className="border-t-2 border-gray-600 w-full my-4" />
+        <hr className="border-t-2 border-gray-600 w-full mt-2 mb-5" />
         
         {/* Name and Roll in separate lines */}
         <div className="flex justify-center mb-8">
@@ -236,12 +236,14 @@ const Dashboard = () => {
             </div>
             
             {/* Row for Description */}
-            <div className="flex flex-col items-center gap-4 mb-6">
-              <label className="w-32 md:w-44" htmlFor="description">
+
+            <div className=" flex items-center md:gap-4 gap-1 mb-6">
+              <label className="w-36 md:w-44" htmlFor="description">
+
                 Description:
               </label>
               <textarea
-                className="flex-1 border-2 text-[rgba(255,255,255,0.9)] p-2 h-32"
+                className="flex-1 border-2 text-[rgba(255,255,255,0.9)] p-2 h-36"
                 id="description"
                 name="description"
                 value={form.description}
@@ -261,7 +263,7 @@ const Dashboard = () => {
           </form>
         </div>
         
-        <hr className="border-t-2 border-gray-600 w-full mt-8" />
+        <hr className="border-t-2 border-gray-600 w-full md:mt-8 mt-8" />
         <Footer />
       </div>
     </>
