@@ -166,7 +166,7 @@ const Dashboard = () => {
         <div className="flex justify-center mb-8">
           <div className="w-full max-w-3xl text-white font-semibold text-lg md:text-2xl">
             <span className="block mb-3">Name: {arr.name}</span>
-            <span className="block uppercase">Roll Number: {arr.roll}</span>
+            <span className="block">Roll Number: {arr.roll}.toLowerCase</span>
           </div>
         </div>
         
