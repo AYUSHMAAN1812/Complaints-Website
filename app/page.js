@@ -22,13 +22,18 @@ export default function Home() {
   const router = useRouter();
   const { user, googleSignIn } = useAuth();
   const [isClient, setIsClient] = useState(false);
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  
   useEffect(() => {
     if (isClient && user?.email?.endsWith("@iith.ac.in")) {
+      // setLoading(true);
+      // setTimeout(()=>{setLoading(false)},2000);
+      
       router.push("/dashboard");
     }
   }, [user, router, isClient]);
@@ -54,6 +59,14 @@ export default function Home() {
   };
 
   if (!isClient) return null;
+  // if(loading)
+  //   {
+  //     return(
+  //       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center">  
+  //       <p className="text-xl font-bold text-white">Loading....</p>
+  //       </div>
+  //     )
+  //   }
   if (user && user?.email?.endsWith("@iith.ac.in")) return null;
   return (
     
