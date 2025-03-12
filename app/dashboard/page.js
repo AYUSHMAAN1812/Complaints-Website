@@ -8,6 +8,8 @@ import React from 'react'
 import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
 import Link from 'next/link'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const issues = ["Radiant Cooling ", "House Keeping", "Plumbing Issues", "Mess", "Water supply", "Hot water ", "Washing machine", "Electrical", "Drinking Water"]
 const hostels = [
   "Charaka",
@@ -101,14 +103,37 @@ const Dashboard = () => {
     const added = await addDataToFireStore(form.name, form.email, form.hostelName, form.hostelRoom, form.description, form.issue);
     
     if (added) {
-      alert("Complaint has been logged!");
+      toast('Complaint has been logged!', {
+                      position: "top-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                      transition: Bounce,
+                  });
       
       // Open the URL in a new tab
       window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxABQX614mVUkgd0xdpzeE5EXt2xHH2tzKm82W0Un4C-ymz6aut6GNpXKivB_PJWO0C_Q/exec");
     }
   }
   
-  return (
+  return <>
+  <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+        />
     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
       <Navbar />
       <span className="block border-t-2 border-gray-600 w-full"></span>
@@ -117,12 +142,12 @@ const Dashboard = () => {
         <span> Roll Number: {arr.roll}</span>
 
       </div>
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col md:justify-center md:items-center justify-items-start items-center'>
         <form className="flex flex-col gap-4 mt-10 items-start text-white z-40 " onSubmit={handleAdd}>
-          <div className="flex gap-2 text-2xl items-start max-h-10">
-            <label className="w-50" htmlFor="issue">Hostel Name:</label>
+          <div className="md:flex md:flex-row flex flex-col gap-2 text-2xl items-start max-h-10 ">
+            <label className="w-44" htmlFor="issue">Hostel Name:</label>
             <select
-              className="w-xl ml-2 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.5)] "
+              className="md:w-xl w-xs ml-1.5 border-2 border-l-white  overflow-y-scroll bg-[#050110] text-[rgba(255,255,255,0.5)]  "
               id="hostelName"
               name="hostelName"
               value={form.hostelName}
@@ -137,10 +162,10 @@ const Dashboard = () => {
               ))}
             </select>
           </div>
-          <div className="flex gap-2 text-2xl items-start">
-            <label className="w-50" htmlFor="room number">Room Number:</label>
+          <div className="md:flex md:flex-row flex flex-col gap-2 text-2xl items-start mt-7 md:mt-0">
+            <label className="w-44" htmlFor="room number">Room Number:</label>
             <input
-              className="w-xl ml-2 border-2 border-l-white "
+              className="md:w-xl  w-xs ml-1.5 border-2 border-l-white "
               type="tel"
               inputMode="numeric"
               pattern="[0-9]*"
@@ -153,11 +178,11 @@ const Dashboard = () => {
             />
 
           </div>
-          <div className="flex gap-2 text-2xl items-start">
-            <label className="w-50" htmlFor="issue">Issue Type:</label>
+          <div className="md:flex md:flex-row flex flex-col gap-2 text-2xl items-start">
+            <label className="w-44" htmlFor="issue">Issue Type:</label>
             <select
 
-              className="w-xl ml-2 border-2 overflow-y-scroll border-l-white bg-[#050110] text-[rgba(255,255,255,0.5)]"
+              className="md:w-xl w-xs ml-1.5 border-2 overflow-y-scroll border-l-white bg-[#050110] text-[rgba(255,255,255,0.5)]"
               id="issue"
               name="issue"
               value={form.issue}
@@ -172,10 +197,10 @@ const Dashboard = () => {
               ))}
             </select>
           </div>
-          <div className="flex gap-4 text-2xl ">
-            <label className="w-50" htmlFor="other-issue">Description:</label>
+          <div className="md:flex md:flex-row flex flex-col gap-4 text-2xl ">
+            <label className="w-44" htmlFor="other-issue">Description:</label>
             <textarea
-              className="border-2 border-l-white h-48 p-2 w-xl text-white z-50"
+              className="border-2 w-xs border-l-white h-48 p-2 md:w-xl text-white z-50 min-h-10 "
               id="description"
               name="description"
               value={form.description}
@@ -196,6 +221,6 @@ const Dashboard = () => {
       </div>
       <Footer />
     </div>
-  )
+  </>
 }
 export default Dashboard
