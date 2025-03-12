@@ -124,17 +124,21 @@ const Dashboard = () => {
     )
     if (added) {
       toast('Complaint has been logged!', {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      })
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbyx3b0qMyBFyknPpmQrK_g6ddBV57TVCveMHS_hDO1PkCb23rRafMult8Gloi590KG8KA/exec")
+
+                      position: "top-right",
+                      autoClose: 1000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                      transition: Bounce,
+                  });
+      
+      // Open the URL in a new tab
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzYgdmUPgs52IvkajRXXyCCUq3qaRySgnylgk-kMKhow5eWih0LyJvWTYrYgBLrJYybJA/exec");
+
     }
   }
 
@@ -162,7 +166,7 @@ const Dashboard = () => {
         <div className="flex justify-center mb-8">
           <div className="w-full max-w-3xl text-white font-semibold text-lg md:text-2xl">
             <span className="block mb-3">Name: {arr.name}</span>
-            <span className="block uppercase">Roll Number: {arr.roll}</span>
+            <span className="block">Roll Number: {arr.roll}.toLowerCase</span>
           </div>
         </div>
         
@@ -232,8 +236,10 @@ const Dashboard = () => {
             </div>
             
             {/* Row for Description */}
+
             <div className=" flex items-center md:gap-4 gap-1 mb-6">
               <label className="w-36 md:w-44" htmlFor="description">
+
                 Description:
               </label>
               <textarea
