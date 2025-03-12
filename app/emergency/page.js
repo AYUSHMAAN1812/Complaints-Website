@@ -7,15 +7,28 @@ const Emer = () => {
   const arr = [
     { name: "New Hostel Office", number: "8331036147" },
     { name: "Carpenter", number: "9652277897" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
+    { name: "Plumber", number: "9666770994" },
   ];
 
   // This function copies the provided text to the clipboard.
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text)
       .then(() => {
-        toast('Copied to Clipboard', {
+        toast('Copied to Clipboard!', {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
@@ -56,8 +69,10 @@ const Emer = () => {
         theme="light"
         transition={Bounce}
       />
-      <div className="absolute inset-0 -z-10 h-full w-full px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] items-center">
-        <div className="flex justify-center items-start mt-20 bg-transparent text-white">
+      <div className="relative min-h-screen ">
+      <div className="absolute min-h-screen inset-0 -z-10  px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] items-center">
+      </div>
+      <div className="relative flex justify-center items-start pt-10 pb-10 bg-transparent text-white">
           <table className="w-[80vw] border border-gray-200">
             <thead className="border-b border-gray-200">
               <tr>
