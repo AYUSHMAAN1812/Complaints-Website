@@ -137,7 +137,7 @@ const Dashboard = () => {
                   });
       
       // Open the URL in a new tab
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbz-WSDLI9hvecfqtq6X4SNqx7m3vCiRDGrWNjuA5DnmNMVfGNPJpA_Nu_nKQZWVn7eEdA/exec");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwZhOkuAlGSQCB8mRJa8aek9olZyrV67uROSfWC8XbScwLUsiTBQlEtm4xeqdk1jfknAg/exec");
 
     }
   }
