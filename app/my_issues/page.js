@@ -164,15 +164,12 @@ const Issues = () => {
                   </td>
                   <td className="px-2 py-2 text-right text-xs md:text-sm font-normal ">
                     <button
-                      className={`text-white hover:cursor-pointer relative inline-flex items-center 
-    justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium 
-    rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 
-    hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 
-    ${darkMode ? "md:text-white" : "md:text-black"}`}
+                      className="text-white hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 
+    "
                       onClick={(e) => { toggleDarkMode(); handleDelete(problem.id, e); }}
 
                     >
-                      <span className="relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
+                      <span className={`relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent ${darkMode ? "md:text-white" : "md:text-black"}`}>
                         {status}
                       </span>
                     </button>
