@@ -69,9 +69,7 @@ export default function Home() {
   //   }
   if (user && user?.email?.endsWith("@iith.ac.in")) return null;
   return (
-    <><Head>
-      <link rel="manifest" href="/manifest.json"/>
-    </Head>
+    <>
     <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] flex justify-center">
       <div className="flex flex-col justify-center items-center gap-4">
       <h1 className="text-3xl font-bold text-white">IITH Complaints Portal</h1>
