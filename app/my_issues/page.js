@@ -81,7 +81,7 @@ const Issues = () => {
       });
       setStatus("Done");
 
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwg9a_91o3LLsDbpdVC8icAj2urlLaSNIc25gmk3alxMmQcXRFCZtqKxxRM44WwN0FJ/exec");
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbwtdwQywMxg-ZBCKyNg1NvwJv5z_ONQ0Fk7Aq8ZiMOYx5HDJyuCTI0s09RWK6SWU-6c/exec");
 
       
  
