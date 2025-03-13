@@ -36,25 +36,6 @@ const Issues = () => {
   const [userdata, setUserdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("Resolved");
-  const [darkMode, setDarkMode] = useState(
-    typeof window !== "undefined" && localStorage.getItem("theme") === "dark"
-  );
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      localStorage.setItem("theme", newMode ? "dark" : "light");
-      return newMode;
-    });
-  };
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
 
   useEffect(() => {
     if (!user?.displayName) return;
@@ -102,8 +83,8 @@ const Issues = () => {
 
       window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxvQVNsNzJVinEwDws7BSw5ibfGSiGimgMFfecUnWHAZKl-twhGz0ucD9zJIuhRxvXk/exec");
 
-
-
+      
+ 
     } catch (error) {
       console.error("Error updating or deleting document: ", error);
     }
@@ -162,14 +143,12 @@ const Issues = () => {
                   <td className="px-2 py-2 align-center text-left whitespace-normal break-words text-xs md:text-sm font-normal text-white underline ">
                     <Link href={problem.threadID} target="_blank ">View</Link>
                   </td>
-                  <td className="px-2 py-2 text-right text-xs md:text-sm font-normal ">
+                  <td className="px-2 py-2 text-right text-xs md:text-sm font-normal md:text-black text-white">
                     <button
-                      className=" hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 
-    "
-                      onClick={(e) => { toggleDarkMode(); handleDelete(problem.id, e); }}
-
+                      className="md:text-black text-white hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300"
+                      onClick={(e) => handleDelete(problem.id, e)}
                     >
-                      <span className={`relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent ${darkMode ? "md:text-black" : "md:text-white"}`}>
+                      <span className="relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
                         {status}
                       </span>
                     </button>
