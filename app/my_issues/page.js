@@ -163,7 +163,7 @@ const Issues = () => {
     rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 
     hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 
     ${darkMode ? "md:text-white" : "md:text-black"}`}
-                      onClick={(e) => handleDelete(problem.id, e)}
+                      onClick={(e) => {setDarkMode(!darkMode),handleDelete(problem.id, e)}}
                     >
                       <span className="text-black relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
                         {status}
