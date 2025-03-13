@@ -159,14 +159,20 @@ const Dashboard = () => {
       />
       
       <div className="min-h-screen w-full overflow-y-auto bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-10 md:px-10 md:py-24">
-        <Navbar />
-        <hr className="border-t-2 border-gray-600 w-full mt-2 mb-5" />
+        <Navbar className="mb-7 md:mb-0" />
+        <hr className="border-t-2 border-gray-600 w-full md:mt-2 mb-5 mt-7" />
         
         {/* Name and Roll in separate lines */}
         <div className="flex justify-center mb-8">
           <div className="w-full max-w-3xl text-white font-semibold text-lg md:text-2xl">
-            <span className="block mb-3">Name: {arr.name}</span>
-            <span className="block">Roll Number: {arr.roll}</span>
+            <div className="flex mb-3 gap-2">
+              <span> Name:</span>
+              <span className='uppercase'> {arr.name} </span> 
+            </div>
+            <div className="flex mb-3 gap-2">
+              <span> Roll Number:</span>
+              <span className='uppercase'> {arr.roll} </span> 
+            </div>
           </div>
         </div>
         
@@ -195,7 +201,7 @@ const Dashboard = () => {
             </div>
             
             {/* Row for Room Number */}
-            <div className="flex items-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-6 ">
               <label className="w-32 md:w-44" htmlFor="hostelRoom">
                 Room Number:
               </label>
