@@ -158,7 +158,7 @@ const Dashboard = () => {
         transition={Bounce}
       />
       
-      <div className="min-h-screen w-full overflow-y-auto bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-10 md:px-10 md:py-24">
+      <div className=" flex-grow min-h-screen w-full overflow-y-auto bg-[radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] px-4 py-10 md:px-10 md:py-24">
         <Navbar className="mb-7 md:mb-0" />
         <hr className="border-t-2 border-gray-600 w-full md:mt-2 mb-5 mt-7" />
         
@@ -258,7 +258,8 @@ const Dashboard = () => {
             </div>
             
             {/* Submit Button */}
-            <div className="flex justify-center">
+            <span className='text-white mt-2 block text-center '>A mail will be will be sent to respective authority by clicking on submit</span>
+            <div className="flex justify-center mt-4">
             <button type='submit' className="hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 md:mb-2 md:me-2 overflow-hidden text-xs md:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 z-10">
                 <span className="relative px-2 py-1 md:px-5 md:py-2.5 whitespace-nowrap transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                   Submit
