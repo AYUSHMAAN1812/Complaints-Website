@@ -143,7 +143,7 @@ const Issues = () => {
                   <td className="px-2 py-2 align-center text-left whitespace-normal break-words text-xs md:text-sm font-normal text-white underline ">
                     <Link href={problem.threadID} target="_blank ">View</Link>
                   </td>
-                  <td className="px-2 py-2 text-right text-xs md:text-sm font-normal md:text-black text-white">
+                  <td className="px-2 py-2 text-right text-xs md:text-sm font-normal text-black ">
                     <button
                       className="md:text-black text-white hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300"
                       onClick={(e) => handleDelete(problem.id, e)}
