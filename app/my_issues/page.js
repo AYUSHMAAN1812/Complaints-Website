@@ -148,7 +148,7 @@ const Issues = () => {
                       className="md:text-black text-white hover:cursor-pointer relative inline-flex items-center justify-center p-0.5 mb-1 overflow-hidden text-xs md:text-sm font-medium rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300"
                       onClick={(e) => handleDelete(problem.id, e)}
                     >
-                      <span className="relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
+                      <span className="text-black relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
                         {status}
                       </span>
                     </button>
