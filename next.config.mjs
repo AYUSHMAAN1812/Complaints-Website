@@ -8,13 +8,11 @@ const withPWA = withPWAInit({
   disable: false,
   workboxOptions: {
     disableDevLogs: true,
-  },
+  }
 });
 
-const nextConfig = {};
+const nextConfig = {
+  reactStrictMode: true,  // ✅ Keep this outside PWA settings
+};
 
-export default withPWA(nextConfig, {
-  experimental: {
-    turbo: true,
-  },
-});
+export default withPWA(nextConfig);
