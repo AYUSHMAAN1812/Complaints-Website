@@ -1,16 +1,17 @@
+// Footer.js
 import React from 'react'
 import Link from 'next/link'
+
 const Footer = () => {
   return (
-    <div className='flex h-10 mb-1 md:mb-0  bg-transparent absolute bottom-0 left-0  w-full gap-2 pl-3.5 justify-center items-center'>
-          <div className='md:mt-4 mt-5 flex gap-8 text-white font-medium justify-center items-center ' >
-            <div className='my-auto '> Copyright @2025</div>
-          <Link className="my-auto py-auto" href={"/reportissue"}>
-                <div className=""> Report an Issue</div>
-            </Link>
-        </div>
-             
-    </div>
+    <footer className="bg-transparent w-full flex items-center justify-center py-2">
+      <div className="flex gap-4 text-white font-medium">
+        <div>©2025</div>
+        <Link href="/reportissue">
+          <span>Report an Issue</span>
+        </Link>
+      </div>
+    </footer>
   )
 }
 
