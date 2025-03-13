@@ -239,7 +239,6 @@ const Dashboard = () => {
 
             <div className=" flex items-center md:gap-4 gap-1 mb-6">
               <label className="w-36 md:w-44" htmlFor="description">
-
                 Description:
               </label>
               <textarea
