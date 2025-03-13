@@ -39,7 +39,13 @@ const Issues = () => {
   const [darkMode, setDarkMode] = useState(
     typeof window !== "undefined" && localStorage.getItem("theme") === "dark"
   );
-
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const newMode = !prev;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      return newMode;
+    });
+  };
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -163,7 +169,8 @@ const Issues = () => {
     rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 
     hover:text-white focus:ring-2 focus:outline-none focus:ring-blue-300 
     ${darkMode ? "md:text-white" : "md:text-black"}`}
-                      onClick={(e) => {setDarkMode(!darkMode),handleDelete(problem.id, e)}}
+                      onClick={(e) => { toggleDarkMode(); handleDelete(problem.id, e); }}
+
                     >
                       <span className="text-black relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
                         {status}
