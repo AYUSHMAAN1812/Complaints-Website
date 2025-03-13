@@ -169,7 +169,7 @@ const Issues = () => {
                       onClick={(e) => { toggleDarkMode(); handleDelete(problem.id, e); }}
 
                     >
-                      <span className={`relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent ${darkMode ? "md:text-white" : "md:text-black"}`}>
+                      <span className={`relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent ${darkMode ? "md:text-black" : "md:text-white"}`}>
                         {status}
                       </span>
                     </button>
