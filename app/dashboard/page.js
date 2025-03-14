@@ -8,6 +8,7 @@ import Navbar from '../components/navbar.js'
 import Footer from '../components/footer.js'
 import { ToastContainer, toast, Bounce } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useRouter } from 'next/navigation'
 
 const issues = [
   "Radiant Cooling ",
@@ -95,7 +96,8 @@ async function addDataToFireStore(name, email, hostelName, hostelRoom, descripti
 }
 
 const Dashboard = () => {
-  const { user } = useAuth()
+  const { user } = useAuth();
+  const router = useRouter();
   const arr = { name: user?.displayName, roll: user?.email?.slice(0, -11) }
   const [form, setForm] = useState({ 
     name: user?.displayName, 
@@ -138,7 +140,14 @@ const Dashboard = () => {
       
       // Open the URL in a new tab
       window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzFcNA66QvV9TtRjA2jGr3kJ0ilXC4lWoavsBxbh1ysIpMtFuiv_6FBTus8As2plf_H8g/exec");
-
+      // try {
+      //   const response = await fetch("/api_c");
+      //   console.log("Triggering complaint status:",response.status);
+      //   const text = await response.text();
+      //   console.log(text);
+      // } catch (error) {
+      //   console.log("Error while loading the html page:",error);
+      // }
     }
   }
 

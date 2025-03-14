@@ -6,6 +6,7 @@ import { collection, getDocs, query, where, doc, deleteDoc, updateDoc, getDoc } 
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 // Fetch data from Firestore
 async function fetchDatafromFirestore(username) {
   try {
@@ -33,6 +34,7 @@ async function fetchDatafromFirestore(username) {
 
 const Issues = () => {
   const { user } = useAuth();
+  const router = useRouter();
   const [userdata, setUserdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("Resolved");
@@ -82,7 +84,13 @@ const Issues = () => {
       setStatus("Done");
 
       window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxvQVNsNzJVinEwDws7BSw5ibfGSiGimgMFfecUnWHAZKl-twhGz0ucD9zJIuhRxvXk/exec");
-
+      // try {
+      //   const response = await fetch("/api_r");
+      //   const text = await response.text();
+      //   console.log(text);
+      // } catch (error) {
+      //   console.log("Error while loading the html page:",error);
+      // }
       
  
     } catch (error) {
@@ -149,7 +157,7 @@ const Issues = () => {
                       onClick={(e) => handleDelete(problem.id, e)}
                     >
                       <span className="relative px-3 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent">
-                        {status}
+                        {problem.resolved ? "Resolved" : "Done"}
                       </span>
                     </button>
                   </td>
