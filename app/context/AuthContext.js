@@ -7,6 +7,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [tokenID, setTokenID] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const googleSignIn = async () => {
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      const token = await user.getIdToken();
 
       // ✅ Restrict access to "iith.ac.in" domain only
       if (!user.email.endsWith("@iith.ac.in")) {
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       setUser(user); // ✅ Set only authorized user
+      setTokenID(token);
       console.log("Google Sign-In successful:", user);
     } catch (error) {
       console.error("Google Sign-In Error:", error.message);
@@ -33,17 +36,20 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null); // ✅ Ensure user is fully logged out
+      setTokenID(null);
     } catch (error) {
       console.error("Sign-Out Error:", error.message);
     }
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && currentUser.email.endsWith("@iith.ac.in")) {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser,currentTokenID) => {
+      if (currentUser && currentUser.email.endsWith("@iith.ac.in")&&currentTokenID) {
         setUser(currentUser);
+        setTokenID(currentTokenID);
       } else {
         setUser(null);
+        setTokenID(null);
       }
     });
 
@@ -60,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
+    <AuthContext.Provider value={{ user, tokenID ,googleSignIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );

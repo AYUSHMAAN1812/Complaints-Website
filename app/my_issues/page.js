@@ -83,14 +83,14 @@ const Issues = () => {
       });
       setStatus("Done");
 
-      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxvQVNsNzJVinEwDws7BSw5ibfGSiGimgMFfecUnWHAZKl-twhGz0ucD9zJIuhRxvXk/exec");
-      // try {
-      //   const response = await fetch("/api_r");
-      //   const text = await response.text();
-      //   console.log(text);
-      // } catch (error) {
-      //   console.log("Error while loading the html page:",error);
-      // }
+      // window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbxvQVNsNzJVinEwDws7BSw5ibfGSiGimgMFfecUnWHAZKl-twhGz0ucD9zJIuhRxvXk/exec");
+      try {
+        const response = await fetch("/api_r");
+        const text = await response.text();
+        console.log(text);
+      } catch (error) {
+        console.log("Error while loading the html page:",error);
+      }
       
  
     } catch (error) {
