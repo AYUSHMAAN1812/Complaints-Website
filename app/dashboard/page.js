@@ -139,20 +139,20 @@ const Dashboard = () => {
                   });
       
       // Open the URL in a new tab
-      // window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzFcNA66QvV9TtRjA2jGr3kJ0ilXC4lWoavsBxbh1ysIpMtFuiv_6FBTus8As2plf_H8g/exec");
-      try {
-        const response = await fetch("/api_c",{
-          method: "GET",
-          headers:{
-            "Authorization" : `Bearer ${tokenID}`,
-          },
-        });
-        console.log("Triggering complaint status:",response.status);
-        const text = await response.text();
-        console.log(text);
-      } catch (error) {
-        console.log("Error while loading the html page:",error);
-      }
+      window.open("https://script.google.com/a/macros/iith.ac.in/s/AKfycbzFcNA66QvV9TtRjA2jGr3kJ0ilXC4lWoavsBxbh1ysIpMtFuiv_6FBTus8As2plf_H8g/exec");
+      // try {
+      //   const response = await fetch("/api_c",{
+      //     method: "GET",
+      //     headers:{
+      //       "Authorization" : `Bearer ${tokenID}`,
+      //     },
+      //   });
+      //   console.log("Triggering complaint status:",response.status);
+      //   const text = await response.text();
+      //   console.log(text);
+      // } catch (error) {
+      //   console.log("Error while loading the html page:",error);
+      // }
     }
   }
 

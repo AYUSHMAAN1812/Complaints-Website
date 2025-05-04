@@ -18,7 +18,7 @@ export default function Home() {
 
   
   useEffect(() => {
-    if (isClient && (user?.email?.endsWith("@iith.ac.in") || user?.email?.endsWith("@gmail.com"))) {
+    if (isClient && (user?.email?.endsWith("@iith.ac.in"))) {
       // setLoading(true);
       // setTimeout(()=>{setLoading(false)},2000);
       
@@ -55,7 +55,7 @@ export default function Home() {
   //       </div>
   //     )
   //   }
-  if (user && (user?.email?.endsWith("@iith.ac.in") || user?.email?.endsWith("@gmail.com"))) return null;
+  if (user && (user?.email?.endsWith("@iith.ac.in"))) return null;
   return (
     <><Head>
       <link rel="manifest" href="/manifest.json"/>
