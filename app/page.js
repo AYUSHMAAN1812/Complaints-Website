@@ -19,8 +19,8 @@ export default function Home() {
   
   useEffect(() => {
     if (isClient && (user?.email?.endsWith("@iith.ac.in"))) {
-      // setLoading(true);
-      // setTimeout(()=>{setLoading(false)},2000);
+      setLoading(true);
+      setTimeout(()=>{setLoading(false)},2000);
       
       router.push("/dashboard");
     }
